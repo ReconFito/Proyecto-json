@@ -1,62 +1,108 @@
 ﻿using System;
-using System.Net.Http;
 using Newtonsoft.Json;
-using System.Threading.Tasks;
-using System.Collections.Generic;
+using System.IO;
+
 
 namespace pruebaAPI.Clases
 {
-    public class Coneccion
+    public class Conexion
     {
-        public Result[] results { get; set; }
-        public async Task<Dictionary<int, object>> Get()
-        {
-            HttpClient cliente = new HttpClient();
-            string contenido = await cliente.GetStringAsync("https://randomuser.me/api/");
-            
-            var d = JsonConvert.DeserializeObject(contenido);
-            var s = JsonConvert.SerializeObject(d, Formatting.Indented);
+        public string path;
+        public string fronteras { get; set; }
 
-            var apiRespuesta = new Dictionary<int, object>() {
-                {1, d },
-                {2, s }
-            };
-            return apiRespuesta;
+        public Conexion()
+        {
+            // Validar valor de entrada del usuario.
+            this.path = @"C:\Users\Emanuel\Desktop\III_Cuatrimestre\Programacion_V\FormatoJSON\pruebaAPI\pruebaAPI\Clases\json.txt";
+            this.fronteras = "";
+        }
+
+        /// <summary>
+        /// Leer el contenido del archivo .json
+        /// </summary>
+        /// <returns>Texto en json con formato.</returns>
+        public Tuple<string, string> Get()
+        {
+            string jsonFile = File.ReadAllText(path);
+
+            var infoCountries = JsonConvert.DeserializeObject<CountryInformation[]>(jsonFile);
+            var json = JsonConvert.SerializeObject(infoCountries, Formatting.Indented);
+
+            string card = GetCountriesInfo(infoCountries);
+            var countriesJson = Tuple.Create(json, CountryCardStructure(card));
+
+            return countriesJson;
+        }
+
+        /// <summary>
+        /// Tomar datos de la API.
+        /// </summary>
+        /// <param name="_countries"></param>
+        /// <returns>Cadena de texto que contiene formato HTML</returns>
+        public string GetCountriesInfo(CountryInformation[] _countries)
+        {
+            string bordes = "";
+            string simbolo = "";
+            string nombre = "";
+            string codigo = "";
+            foreach (var countries in _countries) // Itera a travez de clases.
+            {
+                bordes = "";
+                simbolo = "";
+                nombre = "";
+                codigo = "";
+                this.fronteras += "<tr>" +
+                                    $"<td class='align-middle'>{countries.name}</td>" +
+                                    $"<td class='align-middle'>{countries.capital}</td>" +
+                                    $"<td class='align-middle'>{countries.region}</td>" +
+                                    $"<td class='align-middle'>{countries.population}</td>";
+                foreach (var frontera in countries.borders)
+                {
+                    bordes += frontera + "<br/>";
+                }
+                this.fronteras += $"<td class='align-middle'>{bordes}</td>";
+                foreach (var moneda in countries.currencies)
+                {
+                    nombre += moneda.name + "<br/>";
+                    codigo += moneda.code + "<br/>";
+                    simbolo += moneda.symbol + "<br/>";
+                }
+                this.fronteras += $"<td class='align-middle'>{codigo}</td>" +
+                    $"<td class='align-middle'>{nombre}</td>" +
+                    $"<td class='align-middle'>{simbolo}</td>";
+                this.fronteras += "</tr>";
+            }
+            return fronteras;
+        }
+
+        /// <summary>
+        /// Este método se encarga de crear la estructura HTML
+        /// necesaria para imprimir los datos.
+        /// </summary>
+        /// <returns>Cadena con formato HTML</returns>
+        public string CountryCardStructure(string _fronteras)
+        {
+            string card = "<table class='table table-bordered table-hover'>" +
+                                "<thead class='thead-light'>" +
+                                    "<tr>" +
+                                        "<th class='align-middle' rowspan=2>Nombre</th>" +
+                                        "<th class='align-middle' rowspan=2>Capital</th>" +
+                                        "<th class='align-middle' rowspan=2>Región</th>" +
+                                        "<th class='align-middle' rowspan=2>Población</th>" +
+                                        "<th class='align-middle' rowspan=3>Fronteras</th>" +
+                                        "<th class='align-middle text-center' colspan=3>Tipo de moneda</th>" +
+                                    "</tr>" +
+                                    "<tr class='text-center'>" +
+                                        "<th>Código</th>" +
+                                        "<th>Nombre</th>" +
+                                        "<th>Simbolo</th>" +
+                                    "</tr>" +
+                                "</thead>" +
+                                "<tbody>" +
+                                    $"{_fronteras}" +
+                                "</tbody>" +
+                        "</table>";
+            return card;
         }
     }
-
-    public class Result
-    {
-        public string gender { get; set; }
-        public Name name { get; set; }
-        public Location location { get; set; }
-        public string email { get; set; }
-        public string phone { get; set; }
-        public string cell { get; set; }
-        public Picture picture { get; set; }
-        public string nat { get; set; }
-    }
-
-    public class Name
-    {
-        public string title { get; set; }
-        public string first { get; set; }
-        public string last { get; set; }
-    }
-
-    public class Location
-    {
-        public string city { get; set; }
-        public string state { get; set; }
-        public string country { get; set; }
-        public int postcode { get; set; }
-    }
-
-    public class Picture
-    {
-        public string large { get; set; }
-        public string medium { get; set; }
-        public string thumbnail { get; set; }
-    }
-
 }

@@ -7,21 +7,12 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace pruebaAPI
+namespace pruebaAPI.Forms
 {
 
 
-    public partial class WebForm1
+    public partial class OuputJson
     {
-
-        /// <summary>
-        /// Control form1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
         /// Control salida.
@@ -31,5 +22,19 @@ namespace pruebaAPI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl salida;
+
+        /// <summary>
+        /// Propiedad Master.
+        /// </summary>
+        /// <remarks>
+        /// Propiedad generada automáticamente.
+        /// </remarks>
+        public new pruebaAPI.JsonFormat Master
+        {
+            get
+            {
+                return ((pruebaAPI.JsonFormat)(base.Master));
+            }
+        }
     }
 }
