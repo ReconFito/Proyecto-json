@@ -71,29 +71,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Forms\OuputExample.aspx" />
-    <Content Include="Forms\OuputJson.aspx" />
     <Content Include="Web.config" />
-    <Content Include="Forms\WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clases\API.cs" />
-    <Compile Include="Clases\Class1.cs" />
     <Compile Include="Clases\CountryInformation.cs" />
-    <Compile Include="Forms\OuputExample.aspx.cs">
-      <DependentUpon>OuputExample.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Forms\OuputExample.aspx.designer.cs">
-      <DependentUpon>OuputExample.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\OuputJson.aspx.cs">
-      <DependentUpon>OuputJson.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Forms\OuputJson.aspx.designer.cs">
-      <DependentUpon>OuputJson.aspx</DependentUpon>
-    </Compile>
     <Compile Include="JsonFormat.Master.cs">
       <DependentUpon>JsonFormat.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -102,13 +84,6 @@
       <DependentUpon>JsonFormat.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Forms\WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Forms\WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Clases\json.txt" />
