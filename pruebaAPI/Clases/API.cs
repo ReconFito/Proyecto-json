@@ -53,21 +53,19 @@ namespace pruebaAPI.Clases
                 codigo = "";
                 this.fronteras += "<tr>" +
                                     $"<td class='align-middle'>{countries.name}</td>" +
-                                    $"<td class='align-middle'>{countries.capital}</td>" +
-                                    $"<td class='align-middle'>{countries.region}</td>" +
-                                    $"<td class='align-middle'>{countries.population}</td>";
+                                    $"<td class='align-middle'>{countries.capital}</td>";
                 foreach (var frontera in countries.borders)
                 {
                     bordes += frontera + "<br/>";
                 }
-                this.fronteras += $"<td class='align-middle'>{bordes}</td>";
                 foreach (var moneda in countries.currencies)
                 {
                     nombre += moneda.name + "<br/>";
                     codigo += moneda.code + "<br/>";
                     simbolo += moneda.symbol + "<br/>";
                 }
-                this.fronteras += $"<td class='align-middle'>{codigo}</td>" +
+                this.fronteras += $"<td class='align-middle'>{bordes}</td>" +
+                    $"<td class='align-middle'>{codigo}</td>" +
                     $"<td class='align-middle'>{nombre}</td>" +
                     $"<td class='align-middle'>{simbolo}</td>";
                 this.fronteras += "</tr>";
@@ -79,23 +77,21 @@ namespace pruebaAPI.Clases
         /// Este método se encarga de crear la estructura HTML
         /// necesaria para imprimir los datos.
         /// </summary>
-        /// <returns>Cadena con formato HTML</returns>
+        /// <returns>Cadena con formato HTML</returns> 
         public string CountryCardStructure(string _fronteras)
         {
-            string card = "<table class='table table-bordered table-hover'>" +
-                                "<thead class='thead-light'>" +
-                                    "<tr>" +
-                                        "<th class='align-middle' rowspan=2>Nombre</th>" +
-                                        "<th class='align-middle' rowspan=2>Capital</th>" +
-                                        "<th class='align-middle' rowspan=2>Región</th>" +
-                                        "<th class='align-middle' rowspan=2>Población</th>" +
-                                        "<th class='align-middle' rowspan=3>Fronteras</th>" +
-                                        "<th class='align-middle text-center' colspan=3>Tipo de moneda</th>" +
+            string card = "<table class='table table-bordered'>" +
+                                "<thead class='bg-dark shadow'>" +
+                                    "<tr class='text-white'>" +
+                                        "<th class='align-middle' rowspan='2'>Nombre</th>" +
+                                        "<th class='align-middle' rowspan='2'>Capital</th>" +
+                                        "<th class='align-middle' rowspan='2'>Fronteras</th>" +
+                                        "<th class='text-center' colspan='3'>Tipo de moneda</th>" +
                                     "</tr>" +
-                                    "<tr class='text-center'>" +
-                                        "<th>Código</th>" +
-                                        "<th>Nombre</th>" +
-                                        "<th>Simbolo</th>" +
+                                    "<tr class='text-white'>" +
+                                        "<th class='text-center'>Código</th>" +
+                                        "<th class='text-center'>Nombre</th>" +
+                                        "<th class='text-center'>Simbolo</th>" +
                                     "</tr>" +
                                 "</thead>" +
                                 "<tbody>" +

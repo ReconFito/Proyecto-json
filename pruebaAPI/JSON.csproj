@@ -71,11 +71,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="JsonForm.aspx" />
+    <Content Include="styles\styles.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clases\API.cs" />
     <Compile Include="Clases\CountryInformation.cs" />
+    <Compile Include="JsonForm.aspx.cs">
+      <DependentUpon>JsonForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="JsonForm.aspx.designer.cs">
+      <DependentUpon>JsonForm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="JsonFormat.Master.cs">
       <DependentUpon>JsonFormat.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
